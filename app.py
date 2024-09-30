@@ -43,6 +43,10 @@ def process_extractor(url, fields):
         print(f"Estimated total cost: ${total_cost:.4f}")
 
         return formatted_data
+        
+    except Exception as e:
+        print(f"An error occurred: {e}")
+        return False
 
 # API endpoint
 @app.route('/process', methods=['POST'])
