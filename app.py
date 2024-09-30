@@ -5,9 +5,6 @@ app = Flask(__name__)
 
 # Example function from your Python script
 def process_extractor(url, fields):
-    #url = 'https://webscraper.io/test-sites/e-commerce/static'
-    #fields=['Name of item', 'Price']
-
     try:
         # # Generate timestamp
         timestamp = datetime.now().strftime('%Y%m%d_%H%M%S')
@@ -43,10 +40,9 @@ def process_extractor(url, fields):
         print(f"Estimated total cost: ${total_cost:.4f}")
 
         return formatted_data
-        
     except Exception as e:
         print(f"An error occurred: {e}")
-        return False
+        return str(e)
 
 # API endpoint
 @app.route('/process', methods=['POST'])
@@ -55,7 +51,9 @@ def process_data():
     data = request.json
     url = data.get('url')
     fields = data.get('fields')
-    
+    if fields:
+      fields = fields.split(",")
+
     # Process the data using your script
     result = process_extractor(url, fields)
 
