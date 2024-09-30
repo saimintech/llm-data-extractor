@@ -11,3 +11,4 @@ readability-lxml
 openpyxl
 groq
 google-generativeai 
+Flask
