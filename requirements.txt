@@ -7,6 +7,7 @@ beautifulsoup4
 html2text
 tiktoken
 selenium
+webdriver-manager
 readability-lxml
 openpyxl
 groq
