@@ -4,9 +4,9 @@ from extractor import *
 app = Flask(__name__)
 
 # Example function from your Python script
-def process_extractor(input_data):
-    url = 'https://webscraper.io/test-sites/e-commerce/static'
-    fields=['Name of item', 'Price']
+def process_extractor(url, fields):
+    #url = 'https://webscraper.io/test-sites/e-commerce/static'
+    #fields=['Name of item', 'Price']
 
     try:
         # # Generate timestamp
@@ -49,10 +49,11 @@ def process_extractor(input_data):
 def process_data():
     # Get the input data from the request
     data = request.json
-    input_value = data.get('input_value')
-
+    url = data.get('url')
+    fields = data.get('fields')
+    
     # Process the data using your script
-    result = process_extractor(input_value)
+    result = process_extractor(url, fields)
 
     # Return the result as JSON
     return jsonify({'result': result})
