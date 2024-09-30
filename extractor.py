@@ -20,6 +20,7 @@ from selenium.webdriver.common.by import By
 from selenium.webdriver.common.action_chains import ActionChains
 from selenium.webdriver.support.ui import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
+from webdriver_manager.chrome import ChromeDriverManager
 
 
 from openai import OpenAI
@@ -38,13 +39,16 @@ def setup_selenium():
     # Randomly select a user agent from the imported list
     user_agent = random.choice(USER_AGENTS)
     options.add_argument(f"user-agent={user_agent}")
-
+    options.add_argument("--headless")
+    options.add_argument("--no-sandbox")
+    options.headless = True
+    
     # Add other options
     for option in HEADLESS_OPTIONS:
         options.add_argument(option)
-
+        
     # Specify the path to the ChromeDriver
-    service = Service(r"/usr/bin/chromedriver")  
+    service = Service(ChromeDriverManager().install())  
 
     # Initialize the WebDriver
     driver = webdriver.Chrome(service=service, options=options)
@@ -170,10 +174,10 @@ def create_dynamic_listing_model(field_names: List[str]) -> Type[BaseModel]:
     field_name is a list of names of the fields to extract from the markdown.
     """
     # Create field definitions using aliases for Field parameters
-    field_definitions = {field: (str, ...) for field in field_names}
+    field_definitions = {field.strip(): (str, ...) for field in field_names}
     # Dynamically create the model with all field
     return create_model('DynamicListingModel', **field_definitions)
-
+    
 
 def create_listings_container_model(listing_model: Type[BaseModel]) -> Type[BaseModel]:
     """
