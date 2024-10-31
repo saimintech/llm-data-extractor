@@ -24,13 +24,13 @@ sudo apt update
 sudo apt install -y google-chrome-stable
 
 # Create the virtual environment if it doesn't exist
-if [ ! -d "$ENV_DIR" ]; then
-    python3 -m venv "$ENV_DIR"
+if [ ! -d "$ENV_DIR/venv" ]; then
+    python3 -m venv "$ENV_DIR/venv"
 fi
 
 # Activate the virtual environment
-source "$ENV_DIR/bin/activate"
+source "$ENV_DIR/venv/bin/activate"
 
 # Upgrade pip and install dependencies
-pip install --upgrade pip
-pip install -r requirements.txt
+pip3 install --upgrade pip
+pip3 install -r requirements.txt
