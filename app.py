@@ -4,8 +4,12 @@ from extractor import *
 app = Flask(__name__)
 
 # Example function from your Python script
-def process_extractor(url, fields):
+def process_extractor(url, fields, type="selenium"):
     try:
+
+        if(type == "selenium")
+            return fetch_html_selenium(url)
+        
         # # Generate timestamp
         timestamp = datetime.now().strftime('%Y%m%d_%H%M%S')
         
