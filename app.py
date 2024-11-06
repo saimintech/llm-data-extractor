@@ -4,10 +4,10 @@ from extractor import *
 app = Flask(__name__)
 
 # Example function from your Python script
-def process_extractor(url, fields, type="selenium"):
+def process_extractor(url, fields, type=False):
     try:
 
-        if(type == "selenium")
+        if(type && type == "selenium")
             return fetch_html_selenium(url)
         
         # # Generate timestamp
@@ -55,11 +55,12 @@ def process_data():
     data = request.json
     url = data.get('url')
     fields = data.get('fields')
+    type = data.get('type')
     if fields:
       fields = fields.split(",")
 
     # Process the data using your script
-    result = process_extractor(url, fields)
+    result = process_extractor(url, fields, type)
 
     # Return the result as JSON
     return jsonify({'result': result})
