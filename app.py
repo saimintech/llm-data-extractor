@@ -7,7 +7,7 @@ app = Flask(__name__)
 def process_extractor(url, fields, type=False):
     try:
 
-        if(type && type == "selenium")
+        if type && type == "selenium":
             return fetch_html_selenium(url)
         
         # # Generate timestamp
