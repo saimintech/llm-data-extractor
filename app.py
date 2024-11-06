@@ -4,10 +4,10 @@ from extractor import *
 app = Flask(__name__)
 
 # Example function from your Python script
-def process_extractor(url, fields, type=False):
+def process_extractor(url, fields, type="Groq Llama3.1 70b"):
     try:
 
-        if type and type == "selenium":
+        if type == "selenium":
             return fetch_html_selenium(url)
         
         # # Generate timestamp
@@ -28,7 +28,7 @@ def process_extractor(url, fields, type=False):
         DynamicListingsContainer = create_listings_container_model(DynamicListingModel)
         
         # Format data
-        formatted_data, token_counts = format_data(markdown, DynamicListingsContainer,DynamicListingModel,"Groq Llama3.1 70b")  # Use markdown, not raw_html
+        formatted_data, token_counts = format_data(markdown, DynamicListingsContainer,DynamicListingModel, type)  # Use markdown, not raw_html
         print(formatted_data)
         # Save formatted data
         save_formatted_data(formatted_data, timestamp)
